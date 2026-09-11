@@ -293,3 +293,110 @@
   .page-enter, .pop-in, .confetti span, .marquee-track, .float-slow, .live-dot { animation: none !important; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+/* ---------- Ambience & extra motion ---------- */
+
+@keyframes bu-aurora {
+  0%   { transform: translate3d(-6%, -4%, 0) scale(1); }
+  50%  { transform: translate3d(8%, 6%, 0) scale(1.15); }
+  100% { transform: translate3d(-6%, -4%, 0) scale(1); }
+}
+@keyframes bu-word {
+  from { opacity: 0; transform: translateY(28px) rotate(2deg); filter: blur(6px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes bu-shine {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+@keyframes bu-toast-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes bu-beam {
+  0%, 100% { opacity: 0.25; transform: translateX(-10%) skewX(-12deg); }
+  50%      { opacity: 0.6; transform: translateX(10%) skewX(-12deg); }
+}
+
+.aurora { position: absolute; inset: -20% -10%; pointer-events: none; overflow: hidden; z-index: 0; }
+.aurora span {
+  position: absolute;
+  width: 46vw;
+  height: 46vw;
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.35;
+  animation: bu-aurora 18s ease-in-out infinite;
+}
+.aurora span:nth-child(1) { left: -6%; top: -12%; background: var(--primary); }
+.aurora span:nth-child(2) { right: -8%; top: 6%; background: var(--primary-glow); animation-duration: 24s; opacity: 0.22; }
+.aurora span:nth-child(3) { left: 32%; bottom: -30%; background: color-mix(in oklab, var(--primary) 60%, var(--foreground)); animation-duration: 30s; opacity: 0.14; }
+
+.beam {
+  position: absolute;
+  top: 0; bottom: 0; left: 30%;
+  width: 24%;
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--primary) 16%, transparent), transparent);
+  animation: bu-beam 9s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(
+    340px circle at var(--sx, 50%) var(--sy, 0%),
+    color-mix(in oklab, var(--primary) 12%, transparent),
+    transparent 70%
+  );
+  transition: opacity 0.4s ease;
+}
+
+.word { display: inline-block; animation: bu-word 0.75s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.shine {
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    color-mix(in oklab, var(--foreground) 70%, transparent) 45%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: bu-shine 4.5s linear infinite;
+}
+
+.magnetic { transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1); }
+
+.activity-toast { animation: bu-toast-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.nav-link { position: relative; }
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -6px;
+  height: 2px; width: 100%;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-link:hover::after, .nav-link[data-status="active"]::after { transform: scaleX(1); transform-origin: left; }
+
+.header-shrink { transition: height 0.3s ease, box-shadow 0.3s ease; }
+
+.scroll-bar {
+  position: absolute;
+  left: 0; bottom: -1px;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: width 0.1s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora span, .beam, .word, .shine, .activity-toast { animation: none !important; }
+  .spotlight { display: none; }
+}
