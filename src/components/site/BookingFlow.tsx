@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { Check, Loader2, Minus, Plus, QrCode, Ticket, X } from "lucide-react";
 
 type EventLike = {
@@ -98,7 +99,7 @@ export function BookingDialog({
     .toString()
     .padStart(4, "0")}`;
 
-  return (
+  const overlay = (
     <div className="modal-overlay" role="dialog" aria-modal="true" onClick={onClose}>
       <div className="modal-panel surface-card" onClick={(e) => e.stopPropagation()}>
         <button
