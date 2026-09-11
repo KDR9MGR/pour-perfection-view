@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ChevronRight, Menu, X } from "lucide-react";
 import { Logo, BottleMark } from "./Logo";
 import { Magnetic } from "./Ambience";
 
@@ -18,6 +18,13 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -80,7 +87,7 @@ export function SiteHeader() {
 
         <button
           onClick={() => setOpen((v) => !v)}
-          className="rounded-full border border-border p-2 text-foreground lg:hidden"
+          className="rounded-full border border-border p-2.5 text-foreground lg:hidden"
           aria-label="Toggle menu"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}

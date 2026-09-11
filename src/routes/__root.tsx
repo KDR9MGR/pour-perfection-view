@@ -11,7 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { SiteHeader, SiteFooter } from "../components/site/SiteChrome";
+import { SiteHeader, SiteFooter, MobileActionBar } from "../components/site/SiteChrome";
 import {
   PageTransition,
   RouteProgress,
@@ -142,10 +142,12 @@ function RootComponent() {
             <Outlet />
           </PageTransition>
         </main>
+        <div className="pb-20 lg:pb-0" />
         <SiteFooter />
         <ScrollTop />
         <Spotlight />
         <LiveActivity />
+        <MobileActionBar />
       </div>
     </QueryClientProvider>
   );
