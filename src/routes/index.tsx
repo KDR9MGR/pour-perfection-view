@@ -1,24 +1,309 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, MapPin, Play, Star, Users, CalendarDays } from "lucide-react";
+import { Card, FeatureIcon, Pill, SectionHeading } from "../components/site/Bits";
+import { PhoneFrame } from "../components/site/PhoneFrame";
+import { events, features, perks, steps } from "../lib/site-data";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "BottlesUp — Toronto's Premier Nightlife App" },
+      {
+        name: "description",
+        content:
+          "Skip the lines, secure your table, and experience Toronto's hottest venues with BottlesUp.",
+      },
+      { property: "og:title", content: "BottlesUp — Toronto's Premier Nightlife App" },
+      {
+        property: "og:description",
+        content:
+          "Skip the lines, secure your table, and experience Toronto's hottest venues with BottlesUp.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <>
+      {/* HERO */}
+      <section className="hero-glow relative overflow-hidden">
+        <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 py-16 md:py-24 lg:grid-cols-2">
+          <div>
+            <div className="inline-flex flex-wrap items-center gap-3 rounded-full border border-border bg-surface px-4 py-2">
+              <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-primary">
+                <MapPin className="h-3.5 w-3.5" /> Toronto
+              </span>
+              <span className="text-muted-foreground">•</span>
+              <span className="flex gap-0.5 text-primary">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-current" />
+                ))}
+              </span>
+              <span className="text-muted-foreground">•</span>
+              <span className="text-xs text-muted-foreground">Coming Soon</span>
+            </div>
+
+            <h1 className="mt-7 text-5xl font-extrabold leading-[0.98] sm:text-6xl lg:text-7xl">
+              Toronto's Premier
+              <br />
+              <span className="text-gradient">Nightlife App</span>
+            </h1>
+
+            <p className="mt-5 text-xl font-bold text-primary">
+              VIP Bookings • Digital Tickets • Exclusive Access
+            </p>
+
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
+              Skip the lines, secure your table, and experience Toronto's hottest venues with
+              BottlesUp. From King Street to Entertainment District - your night out, elevated.
+            </p>
+
+            <div className="mt-9 flex flex-wrap gap-4">
+              <Link
+                to="/signin"
+                className="btn-primary inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-bold"
+              >
+                Join Early Access <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/app"
+                className="btn-ghost inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-semibold"
+              >
+                <Play className="h-4 w-4" /> See Preview
+              </Link>
+            </div>
+
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Pill>
+                <Users className="h-3.5 w-3.5 text-primary" /> 500+ Early Users
+              </Pill>
+              <Pill>
+                <CalendarDays className="h-3.5 w-3.5 text-primary" /> 50+ Partner Venues
+              </Pill>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="absolute -right-2 -top-2 z-10 rounded-full border border-border bg-surface px-4 py-2 text-xs font-semibold">
+              <span className="mr-2 inline-block h-2 w-2 rounded-full bg-primary" /> Live
+            </div>
+            <div className="absolute -bottom-2 -left-2 z-10 rounded-full border border-border bg-surface px-4 py-2 text-xs font-semibold">
+              <span className="mr-2 inline-block h-2 w-2 rounded-full bg-success" /> Available
+            </div>
+            <PhoneFrame>
+              <HomeScreen />
+            </PhoneFrame>
+          </div>
+        </div>
+      </section>
+
+      {/* WHY */}
+      <section className="border-t border-border py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-5">
+          <SectionHeading
+            eyebrow="Why BottlesUp"
+            title="Revolutionizing"
+            highlight="Toronto Nightlife"
+            sub="From Entertainment District to King Street West, BottlesUp connects you to the city's most exclusive venues and events. Experience Toronto nightlife like never before."
+          />
+
+          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {features.map((f) => (
+              <Card key={f.title}>
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/12 text-primary">
+                  <FeatureIcon name={f.icon} />
+                </div>
+                <h3 className="mt-5 text-lg font-bold">{f.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+              </Card>
+            ))}
+          </div>
+
+          <div className="surface-card mt-12 flex flex-col items-center justify-between gap-5 p-8 md:flex-row">
+            <p className="text-lg font-bold">
+              Ready to elevate your Toronto nightlife experience?
+            </p>
+            <Link
+              to="/signin"
+              className="btn-primary inline-flex shrink-0 items-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold"
+            >
+              Join the Revolution <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* TRENDING */}
+      <section className="border-t border-border bg-surface py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-5">
+          <SectionHeading
+            eyebrow="Trending Events"
+            title="What's"
+            highlight="Hot Right Now"
+            sub="Don't miss out on the hottest events in your city. Book now before they sell out!"
+          />
+          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {events.slice(0, 6).map((e) => (
+              <EventCard key={e.name} {...e} />
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Link
+              to="/events"
+              className="btn-ghost inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold"
+            >
+              See all events <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="border-t border-border py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-5">
+          <SectionHeading
+            eyebrow="How It Works"
+            title="A Better Night Out,"
+            highlight="In 4 Steps"
+            sub="Getting started with BottlesUp is simple. Follow these four easy steps to book your next unforgettable night out."
+          />
+          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {steps.map((s) => (
+              <Card key={s.n}>
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/12 font-display text-lg font-extrabold text-primary">
+                  {s.n}
+                </div>
+                <h3 className="mt-5 text-lg font-bold">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* VIP LIST */}
+      <section className="hero-glow border-t border-border py-20 md:py-28">
+        <div className="mx-auto max-w-3xl px-5 text-center">
+          <h2 className="text-3xl font-extrabold sm:text-4xl md:text-5xl">
+            Join the VIP List for <span className="text-gradient">Toronto's Hottest App</span>
+          </h2>
+          <p className="mt-5 text-muted-foreground">
+            Be among the first to experience exclusive VIP table bookings, digital event tickets,
+            and insider access to Toronto's premier nightlife venues.
+          </p>
+
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Pill>Early access</Pill>
+            <Pill>No spam</Pill>
+            <Pill>VIP perks</Pill>
+          </div>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            {perks.map((p) => (
+              <div key={p.label} className="surface-card p-5">
+                <div className="text-2xl">{p.emoji}</div>
+                <p className="mt-2 text-sm font-semibold">{p.label}</p>
+              </div>
+            ))}
+          </div>
+
+          <form
+            className="surface-card mt-10 flex flex-col gap-3 p-4 sm:flex-row"
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <input
+              type="email"
+              required
+              placeholder="you@email.com"
+              className="w-full rounded-full border border-input bg-background px-5 py-3.5 text-sm outline-none placeholder:text-muted-foreground focus:border-primary"
+            />
+            <button
+              type="submit"
+              className="btn-primary shrink-0 rounded-full px-7 py-3.5 text-sm font-bold"
+            >
+              Join VIP List
+            </button>
+          </form>
+          <p className="mt-4 text-xs text-muted-foreground">
+            🔒 Your email is secure and will never be shared. Toronto locals only.
+          </p>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export function EventCard({
+  name,
+  venue,
+  area,
+  day,
+  time,
+  tag,
+  price,
+}: (typeof events)[number]) {
+  return (
+    <Card className="group flex flex-col">
+      <div className="relative h-36 overflow-hidden rounded-xl bg-[image:var(--gradient-primary)] opacity-90">
+        <div className="absolute inset-0 bg-background/55" />
+        <span className="absolute left-3 top-3 rounded-full bg-background/80 px-3 py-1 text-[11px] font-bold text-primary">
+          {tag}
+        </span>
+        <span className="absolute bottom-3 left-3 font-display text-2xl font-extrabold">
+          {day} · {time}
+        </span>
+      </div>
+      <h3 className="mt-4 text-lg font-bold">{name}</h3>
+      <p className="mt-1 text-sm text-muted-foreground">
+        {venue} — {area}
+      </p>
+      <div className="mt-5 flex items-center justify-between">
+        <span className="text-sm font-bold text-primary">From {price}</span>
+        <Link
+          to="/events"
+          className="btn-primary rounded-full px-4 py-2 text-xs font-bold"
+        >
+          Book Now
+        </Link>
+      </div>
+    </Card>
+  );
+}
+
+function HomeScreen() {
+  return (
+    <div className="space-y-3">
+      <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+        Upcoming Event
+      </p>
+      <div className="rounded-2xl border border-border bg-surface p-3">
+        <div className="h-20 rounded-xl bg-[image:var(--gradient-primary)] opacity-70" />
+        <h4 className="mt-3 text-sm font-bold">Trending This Week</h4>
+        <p className="mt-1 text-[11px] text-muted-foreground">
+          Toronto's hottest venues, every night.
+        </p>
+        <button className="btn-primary mt-3 w-full rounded-lg py-2 text-xs font-bold">
+          Book Now
+        </button>
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <div className="rounded-xl border border-border bg-surface py-3 text-center">
+          <p className="text-sm font-bold text-primary">VIP</p>
+          <p className="text-[11px] text-muted-foreground">Tables</p>
+        </div>
+        <div className="rounded-xl border border-border bg-surface py-3 text-center">
+          <p className="text-sm font-bold text-primary">Digital</p>
+          <p className="text-[11px] text-muted-foreground">Tickets</p>
+        </div>
+      </div>
+      <div className="rounded-xl border border-border bg-surface p-3">
+        <p className="text-[11px] font-bold">Tonight near you</p>
+        <p className="mt-1 text-[11px] text-muted-foreground">
+          6 venues live · King West · Entertainment District
+        </p>
+      </div>
     </div>
   );
 }
