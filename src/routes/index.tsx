@@ -5,6 +5,7 @@ import { Card, FeatureIcon, Pill, SectionHeading } from "../components/site/Bits
 import { PhoneFrame } from "../components/site/PhoneFrame";
 import { Counter, Marquee, Reveal, Tilt } from "../components/site/Motion";
 import { BookingDialog } from "../components/site/BookingFlow";
+import { Aurora, Magnetic, WeekendCountdown, WordReveal } from "../components/site/Ambience";
 import { events, features, perks, steps } from "../lib/site-data";
 
 export const Route = createFileRoute("/")({
