@@ -90,29 +90,71 @@ export function SiteHeader() {
       <span className="scroll-bar" style={{ width: `${progress}%` }} aria-hidden />
 
       {open && (
-        <div className="border-t border-border bg-background lg:hidden">
+        <div className="sheet max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-border bg-background/98 backdrop-blur-xl lg:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
-            {navLinks.map((l) => (
+            {navLinks.map((l, i) => (
               <Link
                 key={l.to}
                 to={l.to}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
+                style={{ animationDelay: `${i * 40}ms` }}
+                className="sheet-item flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-semibold text-muted-foreground transition-colors active:bg-secondary active:text-foreground"
+                activeProps={{ className: "text-primary bg-secondary/60" }}
               >
                 {l.label}
+                <ChevronRight className="h-4 w-4 opacity-50" />
               </Link>
             ))}
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <Link
+                to="/partners"
+                onClick={() => setOpen(false)}
+                className="btn-ghost rounded-full px-5 py-3.5 text-center text-sm font-semibold"
+              >
+                Be Partner
+              </Link>
+              <Link
+                to="/signin"
+                onClick={() => setOpen(false)}
+                className="btn-primary rounded-full px-5 py-3.5 text-center text-sm font-bold"
+              >
+                Sign In
+              </Link>
+            </div>
             <Link
               to="/signin"
+              search={{ role: "promoter" }}
               onClick={() => setOpen(false)}
-              className="btn-primary mt-2 rounded-full px-5 py-3 text-center text-sm font-bold"
+              className="mt-3 pb-1 text-center text-sm text-muted-foreground"
             >
-              Sign In
+              Promoter Login
             </Link>
           </div>
         </div>
       )}
     </header>
+  );
+}
+
+/** Sticky bottom action bar for phones. */
+export function MobileActionBar() {
+  return (
+    <div className="mobile-bar safe-b px-4 pt-3 lg:hidden">
+      <div className="flex items-center gap-2">
+        <Link
+          to="/app"
+          className="btn-ghost flex-1 rounded-full px-4 py-3 text-center text-sm font-semibold"
+        >
+          See Preview
+        </Link>
+        <Link
+          to="/signin"
+          className="btn-primary flex-[1.3] rounded-full px-4 py-3 text-center text-sm font-bold"
+        >
+          Join Early Access
+        </Link>
+      </div>
+    </div>
   );
 }
 
