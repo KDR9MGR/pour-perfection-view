@@ -235,40 +235,50 @@ function Index() {
   );
 }
 
-export function EventCard({
-  name,
-  venue,
-  area,
-  day,
-  time,
-  tag,
-  price,
-}: (typeof events)[number]) {
+export function EventCard(event: (typeof events)[number]) {
+  const { name, venue, area, day, time, tag, price } = event;
+  const [open, setOpen] = useState(false);
+  const spotsLeft = 6 + (name.length % 9);
+
   return (
-    <Card className="group flex flex-col">
-      <div className="relative h-36 overflow-hidden rounded-xl bg-[image:var(--gradient-primary)] opacity-90">
-        <div className="absolute inset-0 bg-background/55" />
-        <span className="absolute left-3 top-3 rounded-full bg-background/80 px-3 py-1 text-[11px] font-bold text-primary">
-          {tag}
-        </span>
-        <span className="absolute bottom-3 left-3 font-display text-2xl font-extrabold">
-          {day} · {time}
-        </span>
-      </div>
-      <h3 className="mt-4 text-lg font-bold">{name}</h3>
-      <p className="mt-1 text-sm text-muted-foreground">
-        {venue} — {area}
-      </p>
-      <div className="mt-5 flex items-center justify-between">
-        <span className="text-sm font-bold text-primary">From {price}</span>
-        <Link
-          to="/events"
-          className="btn-primary rounded-full px-4 py-2 text-xs font-bold"
-        >
-          Book Now
-        </Link>
-      </div>
-    </Card>
+    <>
+      <Tilt>
+        <Card className="group flex flex-col">
+          <div className="relative h-36 overflow-hidden rounded-xl bg-[image:var(--gradient-primary)] opacity-90">
+            <div className="absolute inset-0 bg-background/55 transition-colors duration-500 group-hover:bg-background/35" />
+            <span className="absolute left-3 top-3 rounded-full bg-background/80 px-3 py-1 text-[11px] font-bold text-primary">
+              {tag}
+            </span>
+            <span className="absolute right-3 top-3 rounded-full bg-background/80 px-3 py-1 text-[11px] font-semibold text-muted-foreground">
+              {spotsLeft} spots left
+            </span>
+            <span className="absolute bottom-3 left-3 font-display text-2xl font-extrabold transition-transform duration-500 group-hover:translate-x-1">
+              {day} · {time}
+            </span>
+          </div>
+          <h3 className="mt-4 text-lg font-bold">{name}</h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {venue} — {area}
+          </p>
+          <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-secondary">
+            <div
+              className="h-full rounded-full bg-[image:var(--gradient-primary)] transition-[width] duration-700 group-hover:brightness-110"
+              style={{ width: `${100 - spotsLeft * 5}%` }}
+            />
+          </div>
+          <div className="mt-5 flex items-center justify-between">
+            <span className="text-sm font-bold text-primary">From {price}</span>
+            <button
+              onClick={() => setOpen(true)}
+              className="btn-primary rounded-full px-4 py-2 text-xs font-bold"
+            >
+              Book Now
+            </button>
+          </div>
+        </Card>
+      </Tilt>
+      <BookingDialog event={event} open={open} onClose={() => setOpen(false)} />
+    </>
   );
 }
 
