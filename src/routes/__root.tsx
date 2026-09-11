@@ -142,8 +142,8 @@ function RootComponent() {
             <Outlet />
           </PageTransition>
         </main>
-        <div className="pb-20 lg:pb-0" />
         <SiteFooter />
+        <div className="h-20 lg:hidden" />
         <ScrollTop />
         <Spotlight />
         <LiveActivity />
