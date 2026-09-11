@@ -50,14 +50,17 @@ function Index() {
             </div>
 
             <h1 className="mt-7 text-5xl font-extrabold leading-[0.98] sm:text-6xl lg:text-7xl">
-              Toronto's Premier
+              <WordReveal text="Toronto's Premier" />
               <br />
-              <span className="text-gradient">Nightlife App</span>
+              <span className="text-gradient">
+                <WordReveal text="Nightlife App" delay={220} />
+              </span>
             </h1>
 
             <p className="mt-5 text-xl font-bold text-primary">
               VIP Bookings • Digital Tickets • Exclusive Access
             </p>
+
 
             <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
               Skip the lines, secure your table, and experience Toronto's hottest venues with
