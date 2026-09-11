@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Logo, BottleMark } from "./Logo";
+import { Magnetic } from "./Ambience";
 
 const navLinks = [
   { to: "/features", label: "Features" },
