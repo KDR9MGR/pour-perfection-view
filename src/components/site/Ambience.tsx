@@ -15,6 +15,7 @@ export function Aurora() {
 /** Soft glow that follows the cursor across the whole page. */
 export function Spotlight() {
   useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
     const el = document.createElement("div");
     el.className = "spotlight";
     el.style.opacity = "0";
@@ -130,7 +131,7 @@ export function LiveActivity() {
   const a = ACTIVITY[i]!;
 
   return (
-    <div className="activity-toast pointer-events-none fixed bottom-6 left-6 z-40 hidden max-w-xs items-center gap-3 rounded-2xl border border-border bg-surface/95 px-4 py-3 shadow-[var(--shadow-card)] backdrop-blur-xl sm:flex">
+    <div className="activity-toast pointer-events-none fixed bottom-24 left-4 right-4 z-40 flex items-center gap-3 rounded-2xl border border-border bg-surface/95 px-4 py-3 shadow-[var(--shadow-card)] backdrop-blur-xl sm:bottom-6 sm:right-auto sm:max-w-xs lg:bottom-6">
       <span className="live-dot h-2.5 w-2.5 shrink-0 rounded-full bg-success" />
       <p className="text-xs leading-relaxed text-muted-foreground">
         <span className="font-bold text-foreground">{a.who}</span> {a.what}{" "}
