@@ -14,6 +14,7 @@ import { Route as EventsRouteImport } from './routes/events'
 import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as SigninRouteImport } from './routes/signin'
 import { Route as VenuesRouteImport } from './routes/venues'
 import { Route as VipTablesRouteImport } from './routes/vip-tables'
 
@@ -42,6 +43,11 @@ const PartnersRoute = PartnersRouteImport.update({
   path: '/partners',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SigninRoute = SigninRouteImport.update({
+  id: '/signin',
+  path: '/signin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VenuesRoute = VenuesRouteImport.update({
   id: '/venues',
   path: '/venues',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/features': typeof FeaturesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/partners': typeof PartnersRoute
+  '/signin': typeof SigninRoute
   '/venues': typeof VenuesRoute
   '/vip-tables': typeof VipTablesRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/features': typeof FeaturesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/partners': typeof PartnersRoute
+  '/signin': typeof SigninRoute
   '/venues': typeof VenuesRoute
   '/vip-tables': typeof VipTablesRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/features': typeof FeaturesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/partners': typeof PartnersRoute
+  '/signin': typeof SigninRoute
   '/venues': typeof VenuesRoute
   '/vip-tables': typeof VipTablesRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/how-it-works'
     | '/partners'
+    | '/signin'
     | '/venues'
     | '/vip-tables'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/how-it-works'
     | '/partners'
+    | '/signin'
     | '/venues'
     | '/vip-tables'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/how-it-works'
     | '/partners'
+    | '/signin'
     | '/venues'
     | '/vip-tables'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   FeaturesRoute: typeof FeaturesRoute
   HowItWorksRoute: typeof HowItWorksRoute
   PartnersRoute: typeof PartnersRoute
+  SigninRoute: typeof SigninRoute
   VenuesRoute: typeof VenuesRoute
   VipTablesRoute: typeof VipTablesRoute
 }
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PartnersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/signin': {
+      id: '/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/venues': {
       id: '/venues'
       path: '/venues'
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesRoute: FeaturesRoute,
   HowItWorksRoute: HowItWorksRoute,
   PartnersRoute: PartnersRoute,
+  SigninRoute: SigninRoute,
   VenuesRoute: VenuesRoute,
   VipTablesRoute: VipTablesRoute,
 }
