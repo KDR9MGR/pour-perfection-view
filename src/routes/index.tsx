@@ -34,7 +34,7 @@ function Index() {
       {/* HERO */}
       <section className="hero-glow relative overflow-hidden">
         <Aurora />
-        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-5 py-10 sm:py-16 md:py-24 lg:grid-cols-2">
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-5 py-10 sm:py-10 sm:py-16 md:py-24 lg:grid-cols-2">
           <div>
             <div className="inline-flex flex-wrap items-center gap-3 rounded-full border border-border bg-surface px-4 py-2">
               <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-primary">
@@ -134,7 +134,7 @@ function Index() {
 
 
       {/* WHY */}
-      <section className="border-t border-border py-14 sm:py-20 md:py-28">
+      <section className="border-t border-border py-14 sm:py-14 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHeading
             eyebrow="Why BottlesUp"
@@ -172,7 +172,7 @@ function Index() {
       </section>
 
       {/* TRENDING */}
-      <section className="border-t border-border bg-surface py-14 sm:py-20 md:py-28">
+      <section className="border-t border-border bg-surface py-14 sm:py-14 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHeading
             eyebrow="Trending Events"
@@ -180,7 +180,10 @@ function Index() {
             highlight="Hot Right Now"
             sub="Don't miss out on the hottest events in your city. Book now before they sell out!"
           />
-          <div className="mt-10 grid gap-5 sm:mt-14 md:grid-cols-2 lg:grid-cols-3">
+          <p className="mt-8 text-xs font-semibold uppercase tracking-widest text-muted-foreground md:hidden">
+            Swipe to browse →
+          </p>
+          <div className="rail mt-4 sm:mt-6 md:mt-14 md:gap-5">
             {events.slice(0, 6).map((e, i) => (
               <Reveal key={e.name} delay={(i % 3) * 90}>
                 <EventCard {...e} />
@@ -199,7 +202,7 @@ function Index() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="border-t border-border py-14 sm:py-20 md:py-28">
+      <section className="border-t border-border py-14 sm:py-14 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHeading
             eyebrow="How It Works"
@@ -224,7 +227,7 @@ function Index() {
       </section>
 
       {/* VIP LIST */}
-      <section className="hero-glow border-t border-border py-14 sm:py-20 md:py-28">
+      <section className="hero-glow border-t border-border py-14 sm:py-14 sm:py-20 md:py-28">
         <div className="mx-auto max-w-3xl px-5 text-center">
           <h2 className="text-3xl font-extrabold sm:text-4xl md:text-5xl">
             Join the VIP List for <span className="text-gradient">Toronto's Hottest App</span>

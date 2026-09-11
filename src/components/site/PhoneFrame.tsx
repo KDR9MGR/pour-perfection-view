@@ -20,7 +20,7 @@ export function PhoneFrame({
   ] as const;
 
   return (
-    <div className="mx-auto w-full max-w-[320px]">
+    <div className="mx-auto w-full max-w-[270px] sm:max-w-[320px]">
       <div className="relative rounded-[2.5rem] border border-border bg-surface-2 p-2.5 shadow-[var(--shadow-card)]">
         <div className="relative overflow-hidden rounded-[2rem] bg-background">
           <div className="absolute left-1/2 top-2 h-5 w-24 -translate-x-1/2 rounded-full bg-surface-2" />
@@ -37,7 +37,7 @@ export function PhoneFrame({
             <Bell className="h-4 w-4 text-muted-foreground" />
           </div>
 
-          <div className="h-[430px] overflow-hidden px-4">{children}</div>
+          <div className="h-[370px] overflow-hidden px-4 sm:h-[430px]">{children}</div>
 
           <div className="mt-2 flex items-center justify-between border-t border-border px-4 py-3">
             {tabs.map((t) => {
