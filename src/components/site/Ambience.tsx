@@ -42,10 +42,12 @@ export function Spotlight() {
 export function WordReveal({
   text,
   className = "",
+  wordClassName = "",
   delay = 0,
 }: {
   text: string;
   className?: string;
+  wordClassName?: string;
   delay?: number;
 }) {
   return (
@@ -53,7 +55,7 @@ export function WordReveal({
       {text.split(" ").map((w, i) => (
         <span
           key={`${w}-${i}`}
-          className="word"
+          className={`word ${wordClassName}`}
           style={{ animationDelay: `${delay + i * 90}ms` }}
         >
           {w}

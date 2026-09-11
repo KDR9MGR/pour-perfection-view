@@ -53,9 +53,7 @@ function Index() {
             <h1 className="mt-7 text-5xl font-extrabold leading-[0.98] sm:text-6xl lg:text-7xl">
               <WordReveal text="Toronto's Premier" />
               <br />
-              <span className="text-gradient">
-                <WordReveal text="Nightlife App" delay={220} />
-              </span>
+              <WordReveal text="Nightlife App" wordClassName="text-gradient" delay={220} />
             </h1>
 
             <p className="mt-5 text-xl font-bold text-primary">
