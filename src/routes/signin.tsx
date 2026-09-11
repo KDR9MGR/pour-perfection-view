@@ -2,10 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card, Pill } from "../components/site/Bits";
 import { perks } from "../lib/site-data";
 
+type SignInSearch = { role?: "promoter" };
+
 export const Route = createFileRoute("/signin")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    role: search["role"] === "promoter" ? ("promoter" as const) : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): SignInSearch =>
+    search["role"] === "promoter" ? { role: "promoter" } : {},
+
   head: () => ({
     meta: [
       { title: "Sign In & Early Access — BottlesUp Toronto" },
