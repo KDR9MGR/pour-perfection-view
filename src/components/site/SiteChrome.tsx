@@ -87,6 +87,8 @@ export function SiteHeader() {
         </button>
       </div>
 
+      <span className="scroll-bar" style={{ width: `${progress}%` }} aria-hidden />
+
       {open && (
         <div className="border-t border-border bg-background lg:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
