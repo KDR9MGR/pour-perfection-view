@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as FeaturesRouteImport } from './routes/features'
+import { Route as VipTablesRouteImport } from './routes/vip-tables'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const FeaturesRoute = FeaturesRouteImport.update({
   path: '/features',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VipTablesRoute = VipTablesRouteImport.update({
+  id: '/vip-tables',
+  path: '/vip-tables',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/events': typeof EventsRoute
   '/features': typeof FeaturesRoute
+  '/vip-tables': typeof VipTablesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/events': typeof EventsRoute
   '/features': typeof FeaturesRoute
+  '/vip-tables': typeof VipTablesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/events': typeof EventsRoute
   '/features': typeof FeaturesRoute
+  '/vip-tables': typeof VipTablesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/events' | '/features'
+  fullPaths: '/' | '/events' | '/features' | '/vip-tables'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/events' | '/features'
-  id: '__root__' | '/' | '/events' | '/features'
+  to: '/' | '/events' | '/features' | '/vip-tables'
+  id: '__root__' | '/' | '/events' | '/features' | '/vip-tables'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EventsRoute: typeof EventsRoute
   FeaturesRoute: typeof FeaturesRoute
+  VipTablesRoute: typeof VipTablesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeaturesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vip-tables': {
+      id: '/vip-tables'
+      path: '/vip-tables'
+      fullPath: '/vip-tables'
+      preLoaderRoute: typeof VipTablesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EventsRoute: EventsRoute,
   FeaturesRoute: FeaturesRoute,
+  VipTablesRoute: VipTablesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
