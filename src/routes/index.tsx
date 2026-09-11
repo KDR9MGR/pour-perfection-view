@@ -32,7 +32,8 @@ function Index() {
     <>
       {/* HERO */}
       <section className="hero-glow relative overflow-hidden">
-        <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 py-16 md:py-24 lg:grid-cols-2">
+        <Aurora />
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 px-5 py-16 md:py-24 lg:grid-cols-2">
           <div>
             <div className="inline-flex flex-wrap items-center gap-3 rounded-full border border-border bg-surface px-4 py-2">
               <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-primary">
