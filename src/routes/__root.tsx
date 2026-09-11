@@ -17,6 +17,7 @@ import {
   RouteProgress,
   ScrollTop,
 } from "../components/site/RouteTransition";
+import { LiveActivity, Spotlight } from "../components/site/Ambience";
 
 function NotFoundComponent() {
   return (
@@ -143,6 +144,8 @@ function RootComponent() {
         </main>
         <SiteFooter />
         <ScrollTop />
+        <Spotlight />
+        <LiveActivity />
       </div>
     </QueryClientProvider>
   );

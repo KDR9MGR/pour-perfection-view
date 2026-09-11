@@ -5,6 +5,7 @@ import { Card, FeatureIcon, Pill, SectionHeading } from "../components/site/Bits
 import { PhoneFrame } from "../components/site/PhoneFrame";
 import { Counter, Marquee, Reveal, Tilt } from "../components/site/Motion";
 import { BookingDialog } from "../components/site/BookingFlow";
+import { Aurora, Magnetic, WeekendCountdown, WordReveal } from "../components/site/Ambience";
 import { events, features, perks, steps } from "../lib/site-data";
 
 export const Route = createFileRoute("/")({
@@ -32,7 +33,8 @@ function Index() {
     <>
       {/* HERO */}
       <section className="hero-glow relative overflow-hidden">
-        <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 py-16 md:py-24 lg:grid-cols-2">
+        <Aurora />
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 px-5 py-16 md:py-24 lg:grid-cols-2">
           <div>
             <div className="inline-flex flex-wrap items-center gap-3 rounded-full border border-border bg-surface px-4 py-2">
               <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-primary">
@@ -49,33 +51,45 @@ function Index() {
             </div>
 
             <h1 className="mt-7 text-5xl font-extrabold leading-[0.98] sm:text-6xl lg:text-7xl">
-              Toronto's Premier
+              <WordReveal text="Toronto's Premier" />
               <br />
-              <span className="text-gradient">Nightlife App</span>
+              <WordReveal text="Nightlife App" wordClassName="text-gradient" delay={220} />
             </h1>
 
             <p className="mt-5 text-xl font-bold text-primary">
               VIP Bookings • Digital Tickets • Exclusive Access
             </p>
 
+
             <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
               Skip the lines, secure your table, and experience Toronto's hottest venues with
               BottlesUp. From King Street to Entertainment District - your night out, elevated.
             </p>
 
-            <div className="mt-9 flex flex-wrap gap-4">
-              <Link
-                to="/signin"
-                className="btn-primary inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-bold"
-              >
-                Join Early Access <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                to="/app"
-                className="btn-ghost inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-semibold"
-              >
-                <Play className="h-4 w-4" /> See Preview
-              </Link>
+            <div className="mt-9 flex flex-wrap items-center gap-4">
+              <Magnetic>
+                <Link
+                  to="/signin"
+                  className="btn-primary inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-bold"
+                >
+                  Join Early Access <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Magnetic>
+              <Magnetic>
+                <Link
+                  to="/app"
+                  className="btn-ghost inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-semibold"
+                >
+                  <Play className="h-4 w-4" /> See Preview
+                </Link>
+              </Magnetic>
+            </div>
+
+            <div className="mt-9">
+              <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+                Next big night starts in
+              </p>
+              <WeekendCountdown />
             </div>
 
             <div className="mt-9 flex flex-wrap gap-3">
