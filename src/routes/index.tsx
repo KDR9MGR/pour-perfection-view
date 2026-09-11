@@ -1,7 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MapPin, Play, Star, Users, CalendarDays } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Check, MapPin, Play, Star, Users, CalendarDays } from "lucide-react";
 import { Card, FeatureIcon, Pill, SectionHeading } from "../components/site/Bits";
 import { PhoneFrame } from "../components/site/PhoneFrame";
+import { Counter, Marquee, Reveal, Tilt } from "../components/site/Motion";
+import { BookingDialog } from "../components/site/BookingFlow";
 import { events, features, perks, steps } from "../lib/site-data";
 
 export const Route = createFileRoute("/")({
