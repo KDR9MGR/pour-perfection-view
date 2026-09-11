@@ -12,6 +12,11 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader, SiteFooter } from "../components/site/SiteChrome";
+import {
+  PageTransition,
+  RouteProgress,
+  ScrollTop,
+} from "../components/site/RouteTransition";
 
 function NotFoundComponent() {
   return (
@@ -128,12 +133,16 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col bg-background">
+        <RouteProgress />
         <SiteHeader />
         <main className="flex-1">
-          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-          <Outlet />
+          <PageTransition>
+            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+            <Outlet />
+          </PageTransition>
         </main>
         <SiteFooter />
+        <ScrollTop />
       </div>
     </QueryClientProvider>
   );

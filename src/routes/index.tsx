@@ -1,7 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MapPin, Play, Star, Users, CalendarDays } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Check, MapPin, Play, Star, Users, CalendarDays } from "lucide-react";
 import { Card, FeatureIcon, Pill, SectionHeading } from "../components/site/Bits";
 import { PhoneFrame } from "../components/site/PhoneFrame";
+import { Counter, Marquee, Reveal, Tilt } from "../components/site/Motion";
+import { BookingDialog } from "../components/site/BookingFlow";
 import { events, features, perks, steps } from "../lib/site-data";
 
 export const Route = createFileRoute("/")({
@@ -77,27 +80,44 @@ function Index() {
 
             <div className="mt-9 flex flex-wrap gap-3">
               <Pill>
-                <Users className="h-3.5 w-3.5 text-primary" /> 500+ Early Users
+                <Users className="h-3.5 w-3.5 text-primary" />
+                <Counter to={500} suffix="+" /> Early Users
               </Pill>
               <Pill>
-                <CalendarDays className="h-3.5 w-3.5 text-primary" /> 50+ Partner Venues
+                <CalendarDays className="h-3.5 w-3.5 text-primary" />
+                <Counter to={50} suffix="+" /> Partner Venues
               </Pill>
             </div>
           </div>
 
           <div className="relative">
             <div className="absolute -right-2 -top-2 z-10 rounded-full border border-border bg-surface px-4 py-2 text-xs font-semibold">
-              <span className="mr-2 inline-block h-2 w-2 rounded-full bg-primary" /> Live
+              <span className="live-dot mr-2 inline-block h-2 w-2 rounded-full bg-primary" /> Live
             </div>
             <div className="absolute -bottom-2 -left-2 z-10 rounded-full border border-border bg-surface px-4 py-2 text-xs font-semibold">
-              <span className="mr-2 inline-block h-2 w-2 rounded-full bg-success" /> Available
+              <span className="live-dot mr-2 inline-block h-2 w-2 rounded-full bg-success" />{" "}
+              Available
             </div>
-            <PhoneFrame>
-              <HomeScreen />
-            </PhoneFrame>
+            <div className="float-slow">
+              <PhoneFrame>
+                <HomeScreen />
+              </PhoneFrame>
+            </div>
           </div>
         </div>
       </section>
+
+      <Marquee
+        items={[
+          "Rebel · Polson Pier",
+          "Lost & Found · King West",
+          "Lavelle Rooftop",
+          "Coda · Annex",
+          "Cube · Entertainment District",
+          "The Everleigh · Queen West",
+        ]}
+      />
+
 
       {/* WHY */}
       <section className="border-t border-border py-20 md:py-28">
@@ -110,14 +130,16 @@ function Index() {
           />
 
           <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {features.map((f) => (
-              <Card key={f.title}>
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/12 text-primary">
-                  <FeatureIcon name={f.icon} />
-                </div>
-                <h3 className="mt-5 text-lg font-bold">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
-              </Card>
+            {features.map((f, i) => (
+              <Reveal key={f.title} delay={(i % 3) * 90}>
+                <Card className="group h-full">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/12 text-primary transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110">
+                    <FeatureIcon name={f.icon} />
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold">{f.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+                </Card>
+              </Reveal>
             ))}
           </div>
 
@@ -145,8 +167,10 @@ function Index() {
             sub="Don't miss out on the hottest events in your city. Book now before they sell out!"
           />
           <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {events.slice(0, 6).map((e) => (
-              <EventCard key={e.name} {...e} />
+            {events.slice(0, 6).map((e, i) => (
+              <Reveal key={e.name} delay={(i % 3) * 90}>
+                <EventCard {...e} />
+              </Reveal>
             ))}
           </div>
           <div className="mt-10 text-center">
@@ -170,14 +194,16 @@ function Index() {
             sub="Getting started with BottlesUp is simple. Follow these four easy steps to book your next unforgettable night out."
           />
           <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s) => (
-              <Card key={s.n}>
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/12 font-display text-lg font-extrabold text-primary">
-                  {s.n}
-                </div>
-                <h3 className="mt-5 text-lg font-bold">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-              </Card>
+            {steps.map((s, i) => (
+              <Reveal key={s.n} delay={i * 110}>
+                <Card className="group h-full">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/12 font-display text-lg font-extrabold text-primary transition-transform duration-300 group-hover:scale-110">
+                    {s.n}
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+                </Card>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -209,66 +235,57 @@ function Index() {
             ))}
           </div>
 
-          <form
-            className="surface-card mt-10 flex flex-col gap-3 p-4 sm:flex-row"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <input
-              type="email"
-              required
-              placeholder="you@email.com"
-              className="w-full rounded-full border border-input bg-background px-5 py-3.5 text-sm outline-none placeholder:text-muted-foreground focus:border-primary"
-            />
-            <button
-              type="submit"
-              className="btn-primary shrink-0 rounded-full px-7 py-3.5 text-sm font-bold"
-            >
-              Join VIP List
-            </button>
-          </form>
-          <p className="mt-4 text-xs text-muted-foreground">
-            🔒 Your email is secure and will never be shared. Toronto locals only.
-          </p>
+          <VipForm />
         </div>
       </section>
     </>
   );
 }
 
-export function EventCard({
-  name,
-  venue,
-  area,
-  day,
-  time,
-  tag,
-  price,
-}: (typeof events)[number]) {
+export function EventCard(event: (typeof events)[number]) {
+  const { name, venue, area, day, time, tag, price } = event;
+  const [open, setOpen] = useState(false);
+  const spotsLeft = 6 + (name.length % 9);
+
   return (
-    <Card className="group flex flex-col">
-      <div className="relative h-36 overflow-hidden rounded-xl bg-[image:var(--gradient-primary)] opacity-90">
-        <div className="absolute inset-0 bg-background/55" />
-        <span className="absolute left-3 top-3 rounded-full bg-background/80 px-3 py-1 text-[11px] font-bold text-primary">
-          {tag}
-        </span>
-        <span className="absolute bottom-3 left-3 font-display text-2xl font-extrabold">
-          {day} · {time}
-        </span>
-      </div>
-      <h3 className="mt-4 text-lg font-bold">{name}</h3>
-      <p className="mt-1 text-sm text-muted-foreground">
-        {venue} — {area}
-      </p>
-      <div className="mt-5 flex items-center justify-between">
-        <span className="text-sm font-bold text-primary">From {price}</span>
-        <Link
-          to="/events"
-          className="btn-primary rounded-full px-4 py-2 text-xs font-bold"
-        >
-          Book Now
-        </Link>
-      </div>
-    </Card>
+    <>
+      <Tilt>
+        <Card className="group flex flex-col">
+          <div className="relative h-36 overflow-hidden rounded-xl bg-[image:var(--gradient-primary)] opacity-90">
+            <div className="absolute inset-0 bg-background/55 transition-colors duration-500 group-hover:bg-background/35" />
+            <span className="absolute left-3 top-3 rounded-full bg-background/80 px-3 py-1 text-[11px] font-bold text-primary">
+              {tag}
+            </span>
+            <span className="absolute right-3 top-3 rounded-full bg-background/80 px-3 py-1 text-[11px] font-semibold text-muted-foreground">
+              {spotsLeft} spots left
+            </span>
+            <span className="absolute bottom-3 left-3 font-display text-2xl font-extrabold transition-transform duration-500 group-hover:translate-x-1">
+              {day} · {time}
+            </span>
+          </div>
+          <h3 className="mt-4 text-lg font-bold">{name}</h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {venue} — {area}
+          </p>
+          <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-secondary">
+            <div
+              className="h-full rounded-full bg-[image:var(--gradient-primary)] transition-[width] duration-700 group-hover:brightness-110"
+              style={{ width: `${100 - spotsLeft * 5}%` }}
+            />
+          </div>
+          <div className="mt-5 flex items-center justify-between">
+            <span className="text-sm font-bold text-primary">From {price}</span>
+            <button
+              onClick={() => setOpen(true)}
+              className="btn-primary rounded-full px-4 py-2 text-xs font-bold"
+            >
+              Book Now
+            </button>
+          </div>
+        </Card>
+      </Tilt>
+      <BookingDialog event={event} open={open} onClose={() => setOpen(false)} />
+    </>
   );
 }
 
@@ -305,5 +322,65 @@ function HomeScreen() {
         </p>
       </div>
     </div>
+  );
+}
+
+function VipForm() {
+  const [state, setState] = useState<"idle" | "sending" | "done">("idle");
+  const [email, setEmail] = useState("");
+
+  if (state === "done") {
+    return (
+      <div className="surface-card pop-in mt-10 flex flex-col items-center gap-3 p-8">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-success/15 text-success">
+          <Check className="h-6 w-6" />
+        </div>
+        <p className="text-lg font-bold">You're on the VIP list</p>
+        <p className="text-sm text-muted-foreground">
+          We'll email {email} the moment early access opens in Toronto.
+        </p>
+        <button
+          onClick={() => {
+            setState("idle");
+            setEmail("");
+          }}
+          className="btn-ghost mt-2 rounded-full px-5 py-2.5 text-xs font-semibold"
+        >
+          Add another email
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <form
+        className="surface-card mt-10 flex flex-col gap-3 p-4 sm:flex-row"
+        onSubmit={(e) => {
+          e.preventDefault();
+          setState("sending");
+          setTimeout(() => setState("done"), 1100);
+        }}
+      >
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@email.com"
+          className="w-full rounded-full border border-input bg-background px-5 py-3.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary"
+        />
+        <button
+          type="submit"
+          disabled={state === "sending"}
+          className="btn-primary shrink-0 rounded-full px-7 py-3.5 text-sm font-bold disabled:opacity-70"
+        >
+          {state === "sending" ? "Adding you…" : "Join VIP List"}
+        </button>
+      </form>
+      <p className="mt-4 text-xs text-muted-foreground">
+        🔒 Your email is secure and will never be shared. Toronto locals only.
+      </p>
+    </>
   );
 }

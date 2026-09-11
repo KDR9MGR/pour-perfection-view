@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, SectionHeading } from "../components/site/Bits";
+import { Reveal } from "../components/site/Motion";
 import { EventCard } from "./index";
 import { events } from "../lib/site-data";
 
@@ -34,8 +35,10 @@ function EventsPage() {
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-5">
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {events.map((e) => (
-              <EventCard key={e.name} {...e} />
+            {events.map((e, i) => (
+              <Reveal key={e.name} delay={(i % 3) * 90}>
+                <EventCard {...e} />
+              </Reveal>
             ))}
           </div>
         </div>
