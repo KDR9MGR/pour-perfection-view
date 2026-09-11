@@ -67,19 +67,30 @@ function Index() {
               BottlesUp. From King Street to Entertainment District - your night out, elevated.
             </p>
 
-            <div className="mt-9 flex flex-wrap gap-4">
-              <Link
-                to="/signin"
-                className="btn-primary inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-bold"
-              >
-                Join Early Access <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                to="/app"
-                className="btn-ghost inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-semibold"
-              >
-                <Play className="h-4 w-4" /> See Preview
-              </Link>
+            <div className="mt-9 flex flex-wrap items-center gap-4">
+              <Magnetic>
+                <Link
+                  to="/signin"
+                  className="btn-primary inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-bold"
+                >
+                  Join Early Access <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Magnetic>
+              <Magnetic>
+                <Link
+                  to="/app"
+                  className="btn-ghost inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-semibold"
+                >
+                  <Play className="h-4 w-4" /> See Preview
+                </Link>
+              </Magnetic>
+            </div>
+
+            <div className="mt-9">
+              <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+                Next big night starts in
+              </p>
+              <WeekendCountdown />
             </div>
 
             <div className="mt-9 flex flex-wrap gap-3">
