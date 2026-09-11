@@ -16,10 +16,32 @@ const navLinks = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setScrolled(y > 12);
+      setProgress(max > 0 ? (y / max) * 100 : 0);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-xl">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-5">
+    <header
+      className={`sticky top-0 z-50 border-b bg-background/85 backdrop-blur-xl transition-colors ${
+        scrolled ? "border-border shadow-[var(--shadow-card)]" : "border-border/40"
+      }`}
+    >
+      <div
+        className={`header-shrink mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 ${
+          scrolled ? "h-16" : "h-20"
+        }`}
+      >
         <Logo />
 
         <nav className="hidden items-center gap-7 lg:flex">
@@ -27,7 +49,7 @@ export function SiteHeader() {
             <Link
               key={l.to}
               to={l.to}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="nav-link text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               activeProps={{ className: "text-primary" }}
             >
               {l.label}
@@ -39,7 +61,7 @@ export function SiteHeader() {
           <Link
             to="/signin"
             search={{ role: "promoter" }}
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="nav-link text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             Promoter Login
           </Link>
@@ -49,9 +71,11 @@ export function SiteHeader() {
           >
             Be Partner
           </Link>
-          <Link to="/signin" className="btn-primary rounded-full px-5 py-2.5 text-sm font-bold">
-            Sign In
-          </Link>
+          <Magnetic>
+            <Link to="/signin" className="btn-primary block rounded-full px-5 py-2.5 text-sm font-bold">
+              Sign In
+            </Link>
+          </Magnetic>
         </div>
 
         <button
