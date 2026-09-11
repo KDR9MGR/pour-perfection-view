@@ -400,3 +400,84 @@
   .aurora span, .beam, .word, .shine, .activity-toast { animation: none !important; }
   .spotlight { display: none; }
 }
+
+/* ---------- Mobile & touch ---------- */
+
+@media (pointer: coarse) {
+  .tilt { transform: none !important; }
+  .magnetic { transform: none !important; }
+  .spotlight { display: none; }
+  .marquee-track { animation-duration: 18s; }
+}
+
+/* Touch feedback on the main buttons */
+.btn-primary:active, .btn-ghost:active { transform: scale(0.97); }
+
+.safe-b { padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); }
+
+.mobile-bar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 45;
+  background: color-mix(in oklab, var(--background) 88%, transparent);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--color-border);
+}
+
+@keyframes bu-sheet-in {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: none; }
+}
+.sheet { animation: bu-sheet-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.sheet-item { animation: bu-sheet-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Snap-scrolling horizontal rails on phones */
+.rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 82%;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+}
+.rail::-webkit-scrollbar { display: none; }
+.rail > * { scroll-snap-align: center; }
+
+@media (min-width: 768px) {
+  .rail {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: visible;
+  }
+}
+@media (min-width: 1024px) {
+  .rail { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Booking dialog becomes a bottom sheet on phones */
+@media (max-width: 639px) {
+  .modal-overlay { align-items: flex-end; padding: 0; }
+  .modal-panel {
+    max-width: 100%;
+    max-height: 92dvh;
+    border-radius: 1.75rem 1.75rem 0 0;
+    padding: 1.25rem 1.25rem max(1.5rem, env(safe-area-inset-bottom));
+    animation: bu-sheet-up 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .modal-panel::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 4px;
+    margin: 0 auto 0.9rem;
+    border-radius: 999px;
+    background: var(--color-border);
+  }
+}
+@keyframes bu-sheet-up {
+  from { transform: translateY(100%); }
+  to { transform: none; }
+}

@@ -31,7 +31,7 @@ function SignInPage() {
   const promoter = role === "promoter";
 
   return (
-    <section className="hero-glow py-20 md:py-28">
+    <section className="hero-glow py-14 sm:py-20 md:py-28">
       <div className="mx-auto grid max-w-5xl items-center gap-12 px-5 lg:grid-cols-2">
         <div>
           <p className="eyebrow">{promoter ? "Promoter Login" : "Early Access"}</p>

@@ -34,7 +34,7 @@ function Index() {
       {/* HERO */}
       <section className="hero-glow relative overflow-hidden">
         <Aurora />
-        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 px-5 py-16 md:py-24 lg:grid-cols-2">
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-5 py-10 sm:py-10 sm:py-16 md:py-24 lg:grid-cols-2">
           <div>
             <div className="inline-flex flex-wrap items-center gap-3 rounded-full border border-border bg-surface px-4 py-2">
               <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-primary">
@@ -50,49 +50,49 @@ function Index() {
               <span className="text-xs text-muted-foreground">Coming Soon</span>
             </div>
 
-            <h1 className="mt-7 text-5xl font-extrabold leading-[0.98] sm:text-6xl lg:text-7xl">
+            <h1 className="mt-6 text-[2.6rem] font-extrabold leading-[0.98] sm:text-6xl lg:text-7xl">
               <WordReveal text="Toronto's Premier" />
               <br />
               <WordReveal text="Nightlife App" wordClassName="text-gradient" delay={220} />
             </h1>
 
-            <p className="mt-5 text-xl font-bold text-primary">
+            <p className="mt-4 text-lg font-bold text-primary sm:text-xl">
               VIP Bookings • Digital Tickets • Exclusive Access
             </p>
 
 
-            <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
+            <p className="mt-4 max-w-lg text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
               Skip the lines, secure your table, and experience Toronto's hottest venues with
               BottlesUp. From King Street to Entertainment District - your night out, elevated.
             </p>
 
-            <div className="mt-9 flex flex-wrap items-center gap-4">
-              <Magnetic>
+            <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap sm:items-center sm:gap-4">
+              <Magnetic className="w-full sm:w-auto">
                 <Link
                   to="/signin"
-                  className="btn-primary inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-bold"
+                  className="btn-primary flex w-full items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-bold sm:inline-flex sm:w-auto"
                 >
                   Join Early Access <ArrowRight className="h-4 w-4" />
                 </Link>
               </Magnetic>
-              <Magnetic>
+              <Magnetic className="w-full sm:w-auto">
                 <Link
                   to="/app"
-                  className="btn-ghost inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-semibold"
+                  className="btn-ghost flex w-full items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-semibold sm:inline-flex sm:w-auto"
                 >
                   <Play className="h-4 w-4" /> See Preview
                 </Link>
               </Magnetic>
             </div>
 
-            <div className="mt-9">
+            <div className="mt-8">
               <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
                 Next big night starts in
               </p>
               <WeekendCountdown />
             </div>
 
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Pill>
                 <Users className="h-3.5 w-3.5 text-primary" />
                 <Counter to={500} suffix="+" /> Early Users
@@ -134,7 +134,7 @@ function Index() {
 
 
       {/* WHY */}
-      <section className="border-t border-border py-20 md:py-28">
+      <section className="border-t border-border py-14 sm:py-14 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHeading
             eyebrow="Why BottlesUp"
@@ -143,7 +143,7 @@ function Index() {
             sub="From Entertainment District to King Street West, BottlesUp connects you to the city's most exclusive venues and events. Experience Toronto nightlife like never before."
           />
 
-          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-5 sm:mt-14 md:grid-cols-2 lg:grid-cols-3">
             {features.map((f, i) => (
               <Reveal key={f.title} delay={(i % 3) * 90}>
                 <Card className="group h-full">
@@ -172,7 +172,7 @@ function Index() {
       </section>
 
       {/* TRENDING */}
-      <section className="border-t border-border bg-surface py-20 md:py-28">
+      <section className="border-t border-border bg-surface py-14 sm:py-14 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHeading
             eyebrow="Trending Events"
@@ -180,7 +180,10 @@ function Index() {
             highlight="Hot Right Now"
             sub="Don't miss out on the hottest events in your city. Book now before they sell out!"
           />
-          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <p className="mt-8 text-xs font-semibold uppercase tracking-widest text-muted-foreground md:hidden">
+            Swipe to browse →
+          </p>
+          <div className="rail mt-4 sm:mt-6 md:mt-14 md:gap-5">
             {events.slice(0, 6).map((e, i) => (
               <Reveal key={e.name} delay={(i % 3) * 90}>
                 <EventCard {...e} />
@@ -199,7 +202,7 @@ function Index() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="border-t border-border py-20 md:py-28">
+      <section className="border-t border-border py-14 sm:py-14 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHeading
             eyebrow="How It Works"
@@ -207,7 +210,7 @@ function Index() {
             highlight="In 4 Steps"
             sub="Getting started with BottlesUp is simple. Follow these four easy steps to book your next unforgettable night out."
           />
-          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-5 sm:mt-14 md:grid-cols-2 lg:grid-cols-4">
             {steps.map((s, i) => (
               <Reveal key={s.n} delay={i * 110}>
                 <Card className="group h-full">
@@ -224,7 +227,7 @@ function Index() {
       </section>
 
       {/* VIP LIST */}
-      <section className="hero-glow border-t border-border py-20 md:py-28">
+      <section className="hero-glow border-t border-border py-14 sm:py-14 sm:py-20 md:py-28">
         <div className="mx-auto max-w-3xl px-5 text-center">
           <h2 className="text-3xl font-extrabold sm:text-4xl md:text-5xl">
             Join the VIP List for <span className="text-gradient">Toronto's Hottest App</span>
