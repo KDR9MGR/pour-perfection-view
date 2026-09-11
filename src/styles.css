@@ -456,3 +456,28 @@
 @media (min-width: 1024px) {
   .rail { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+
+/* Booking dialog becomes a bottom sheet on phones */
+@media (max-width: 639px) {
+  .modal-overlay { align-items: flex-end; padding: 0; }
+  .modal-panel {
+    max-width: 100%;
+    max-height: 92dvh;
+    border-radius: 1.75rem 1.75rem 0 0;
+    padding: 1.25rem 1.25rem max(1.5rem, env(safe-area-inset-bottom));
+    animation: bu-sheet-up 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .modal-panel::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 4px;
+    margin: 0 auto 0.9rem;
+    border-radius: 999px;
+    background: var(--color-border);
+  }
+}
+@keyframes bu-sheet-up {
+  from { transform: translateY(100%); }
+  to { transform: none; }
+}
