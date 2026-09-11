@@ -80,27 +80,44 @@ function Index() {
 
             <div className="mt-9 flex flex-wrap gap-3">
               <Pill>
-                <Users className="h-3.5 w-3.5 text-primary" /> 500+ Early Users
+                <Users className="h-3.5 w-3.5 text-primary" />
+                <Counter to={500} suffix="+" /> Early Users
               </Pill>
               <Pill>
-                <CalendarDays className="h-3.5 w-3.5 text-primary" /> 50+ Partner Venues
+                <CalendarDays className="h-3.5 w-3.5 text-primary" />
+                <Counter to={50} suffix="+" /> Partner Venues
               </Pill>
             </div>
           </div>
 
           <div className="relative">
             <div className="absolute -right-2 -top-2 z-10 rounded-full border border-border bg-surface px-4 py-2 text-xs font-semibold">
-              <span className="mr-2 inline-block h-2 w-2 rounded-full bg-primary" /> Live
+              <span className="live-dot mr-2 inline-block h-2 w-2 rounded-full bg-primary" /> Live
             </div>
             <div className="absolute -bottom-2 -left-2 z-10 rounded-full border border-border bg-surface px-4 py-2 text-xs font-semibold">
-              <span className="mr-2 inline-block h-2 w-2 rounded-full bg-success" /> Available
+              <span className="live-dot mr-2 inline-block h-2 w-2 rounded-full bg-success" />{" "}
+              Available
             </div>
-            <PhoneFrame>
-              <HomeScreen />
-            </PhoneFrame>
+            <div className="float-slow">
+              <PhoneFrame>
+                <HomeScreen />
+              </PhoneFrame>
+            </div>
           </div>
         </div>
       </section>
+
+      <Marquee
+        items={[
+          "Rebel · Polson Pier",
+          "Lost & Found · King West",
+          "Lavelle Rooftop",
+          "Coda · Annex",
+          "Cube · Entertainment District",
+          "The Everleigh · Queen West",
+        ]}
+      />
+
 
       {/* WHY */}
       <section className="border-t border-border py-20 md:py-28">
@@ -113,14 +130,16 @@ function Index() {
           />
 
           <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {features.map((f) => (
-              <Card key={f.title}>
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/12 text-primary">
-                  <FeatureIcon name={f.icon} />
-                </div>
-                <h3 className="mt-5 text-lg font-bold">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
-              </Card>
+            {features.map((f, i) => (
+              <Reveal key={f.title} delay={(i % 3) * 90}>
+                <Card className="group h-full">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/12 text-primary transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110">
+                    <FeatureIcon name={f.icon} />
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold">{f.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+                </Card>
+              </Reveal>
             ))}
           </div>
 
@@ -148,8 +167,10 @@ function Index() {
             sub="Don't miss out on the hottest events in your city. Book now before they sell out!"
           />
           <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {events.slice(0, 6).map((e) => (
-              <EventCard key={e.name} {...e} />
+            {events.slice(0, 6).map((e, i) => (
+              <Reveal key={e.name} delay={(i % 3) * 90}>
+                <EventCard {...e} />
+              </Reveal>
             ))}
           </div>
           <div className="mt-10 text-center">
@@ -173,14 +194,16 @@ function Index() {
             sub="Getting started with BottlesUp is simple. Follow these four easy steps to book your next unforgettable night out."
           />
           <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s) => (
-              <Card key={s.n}>
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/12 font-display text-lg font-extrabold text-primary">
-                  {s.n}
-                </div>
-                <h3 className="mt-5 text-lg font-bold">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-              </Card>
+            {steps.map((s, i) => (
+              <Reveal key={s.n} delay={i * 110}>
+                <Card className="group h-full">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/12 font-display text-lg font-extrabold text-primary transition-transform duration-300 group-hover:scale-110">
+                    {s.n}
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+                </Card>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -212,26 +235,7 @@ function Index() {
             ))}
           </div>
 
-          <form
-            className="surface-card mt-10 flex flex-col gap-3 p-4 sm:flex-row"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <input
-              type="email"
-              required
-              placeholder="you@email.com"
-              className="w-full rounded-full border border-input bg-background px-5 py-3.5 text-sm outline-none placeholder:text-muted-foreground focus:border-primary"
-            />
-            <button
-              type="submit"
-              className="btn-primary shrink-0 rounded-full px-7 py-3.5 text-sm font-bold"
-            >
-              Join VIP List
-            </button>
-          </form>
-          <p className="mt-4 text-xs text-muted-foreground">
-            🔒 Your email is secure and will never be shared. Toronto locals only.
-          </p>
+          <VipForm />
         </div>
       </section>
     </>
