@@ -324,3 +324,63 @@ function HomeScreen() {
     </div>
   );
 }
+
+function VipForm() {
+  const [state, setState] = useState<"idle" | "sending" | "done">("idle");
+  const [email, setEmail] = useState("");
+
+  if (state === "done") {
+    return (
+      <div className="surface-card pop-in mt-10 flex flex-col items-center gap-3 p-8">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-success/15 text-success">
+          <Check className="h-6 w-6" />
+        </div>
+        <p className="text-lg font-bold">You're on the VIP list</p>
+        <p className="text-sm text-muted-foreground">
+          We'll email {email} the moment early access opens in Toronto.
+        </p>
+        <button
+          onClick={() => {
+            setState("idle");
+            setEmail("");
+          }}
+          className="btn-ghost mt-2 rounded-full px-5 py-2.5 text-xs font-semibold"
+        >
+          Add another email
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <form
+        className="surface-card mt-10 flex flex-col gap-3 p-4 sm:flex-row"
+        onSubmit={(e) => {
+          e.preventDefault();
+          setState("sending");
+          setTimeout(() => setState("done"), 1100);
+        }}
+      >
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@email.com"
+          className="w-full rounded-full border border-input bg-background px-5 py-3.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary"
+        />
+        <button
+          type="submit"
+          disabled={state === "sending"}
+          className="btn-primary shrink-0 rounded-full px-7 py-3.5 text-sm font-bold disabled:opacity-70"
+        >
+          {state === "sending" ? "Adding you…" : "Join VIP List"}
+        </button>
+      </form>
+      <p className="mt-4 text-xs text-muted-foreground">
+        🔒 Your email is secure and will never be shared. Toronto locals only.
+      </p>
+    </>
+  );
+}
