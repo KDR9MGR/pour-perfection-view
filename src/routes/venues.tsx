@@ -18,6 +18,8 @@ export const Route = createFileRoute("/venues")({
         property: "og:description",
         content: "50+ partner venues across Toronto's best nightlife neighbourhoods.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: VenuesPage,

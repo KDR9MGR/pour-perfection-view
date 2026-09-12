@@ -18,6 +18,8 @@ export const Route = createFileRoute("/vip-tables")({
         property: "og:description",
         content: "Premium table bookings at Toronto's hottest clubs and lounges.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: TablesPage,

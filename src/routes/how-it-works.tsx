@@ -18,6 +18,8 @@ export const Route = createFileRoute("/how-it-works")({
         property: "og:description",
         content: "Discover, select, book and enjoy — a better night out in four steps.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: HowPage,

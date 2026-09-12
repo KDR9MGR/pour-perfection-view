@@ -23,6 +23,8 @@ export const Route = createFileRoute("/")({
         content:
           "Skip the lines, secure your table, and experience Toronto's hottest venues with BottlesUp.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,

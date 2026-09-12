@@ -18,6 +18,8 @@ export const Route = createFileRoute("/events")({
         property: "og:description",
         content: "Curated Toronto events with digital tickets and QR code entry.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: EventsPage,

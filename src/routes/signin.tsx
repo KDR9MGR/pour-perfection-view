@@ -24,6 +24,8 @@ export const Route = createFileRoute("/signin")({
         property: "og:description",
         content: "Early access, VIP perks and promoter login for BottlesUp Toronto.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: SignInPage,

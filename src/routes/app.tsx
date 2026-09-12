@@ -18,6 +18,8 @@ export const Route = createFileRoute("/app")({
         property: "og:description",
         content: "See the BottlesUp app screens before launch.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: AppPreview,

@@ -18,6 +18,8 @@ export const Route = createFileRoute("/features")({
         property: "og:description",
         content: "Everything BottlesUp gives you for a better night out in Toronto.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: FeaturesPage,
