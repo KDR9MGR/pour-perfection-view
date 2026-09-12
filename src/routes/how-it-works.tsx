@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Card, PageHero } from "../components/site/Bits";
+import { Reveal } from "../components/site/Motion";
 import { steps } from "../lib/site-data";
 
 export const Route = createFileRoute("/how-it-works")({
@@ -31,11 +32,12 @@ function HowPage() {
         highlight="In 4 Steps"
         sub="Getting started with BottlesUp is simple. Follow these four easy steps to book your next unforgettable night out."
       />
-      <section className="py-20">
+      <section className="py-14 md:py-20">
         <div className="mx-auto max-w-7xl space-y-5 px-5">
-          {steps.map((s) => (
-            <Card key={s.n} className="flex flex-col gap-5 md:flex-row md:items-center">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary/12 font-display text-2xl font-extrabold text-primary">
+          {steps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 80}>
+            <Card className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-4 p-5 sm:p-6 md:flex md:items-center md:gap-5">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/12 font-display text-xl font-extrabold text-primary md:h-14 md:w-14 md:text-2xl">
                 {s.n}
               </div>
               <div>
@@ -43,11 +45,12 @@ function HowPage() {
                 <p className="mt-1 text-sm text-muted-foreground">{s.desc}</p>
               </div>
             </Card>
+            </Reveal>
           ))}
           <div className="pt-6 text-center">
             <Link
               to="/signin"
-              className="btn-primary inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-bold"
+              className="btn-primary inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-bold sm:w-auto"
             >
               Join Early Access <ArrowRight className="h-4 w-4" />
             </Link>

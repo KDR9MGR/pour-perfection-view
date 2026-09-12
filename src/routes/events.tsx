@@ -32,9 +32,12 @@ function EventsPage() {
         highlight="Hot Right Now"
         sub="Don't miss out on the hottest events in your city. Book now before they sell out!"
       />
-      <section className="py-20">
+      <section className="py-14 md:py-20">
         <div className="mx-auto max-w-7xl px-5">
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground md:hidden">
+            Swipe to browse →
+          </p>
+          <div className="rail md:gap-5">
             {events.map((e, i) => (
               <Reveal key={e.name} delay={(i % 3) * 90}>
                 <EventCard {...e} />
@@ -43,7 +46,7 @@ function EventsPage() {
           </div>
         </div>
       </section>
-      <section className="border-t border-border bg-surface py-20">
+      <section className="border-t border-border bg-surface py-14 md:py-20">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHeading
             eyebrow="Digital Tickets"
