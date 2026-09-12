@@ -10,6 +10,7 @@ import {
   Wallet,
   Zap,
 } from "lucide-react";
+import { Aurora } from "./Ambience";
 
 const icons: Record<string, typeof Crown> = {
   crown: Crown,
@@ -82,10 +83,11 @@ export function PageHero({
   sub: string;
 }) {
   return (
-    <section className="hero-glow border-b border-border">
-      <div className="mx-auto max-w-7xl px-5 py-20 md:py-28">
+    <section className="hero-glow relative overflow-hidden border-b border-border">
+      <Aurora />
+      <div className="relative z-10 mx-auto max-w-7xl px-5 py-14 sm:py-20 md:py-28">
         <p className="eyebrow">{eyebrow}</p>
-        <h1 className="mt-4 max-w-3xl text-4xl font-extrabold leading-[1.05] sm:text-5xl md:text-6xl">
+        <h1 className="mt-4 max-w-3xl text-[2.2rem] font-extrabold leading-[1.05] sm:text-5xl md:text-6xl">
           {title} <span className="text-gradient">{highlight}</span>
         </h1>
         <p className="mt-5 max-w-2xl text-lg text-muted-foreground">{sub}</p>

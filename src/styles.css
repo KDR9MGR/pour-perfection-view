@@ -459,6 +459,9 @@
 
 /* Booking dialog becomes a bottom sheet on phones */
 @media (max-width: 639px) {
+  .surface-card { border-radius: var(--radius-xl); }
+  .activity-toast { max-width: calc(100vw - 2rem); }
+  input, select, textarea { font-size: 16px; }
   .modal-overlay { align-items: flex-end; padding: 0; }
   .modal-panel {
     max-width: 100%;
